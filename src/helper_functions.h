@@ -19,6 +19,8 @@
 const double M_PI = 3.14159265358979323846;
 #endif
 
+const float EPS = 1E-5;
+
 /*
  * Struct representing one position/control measurement.
  */
@@ -239,6 +241,12 @@ inline bool read_landmark_data(std::string filename, std::vector<LandmarkObs>& o
 		observations.push_back(meas);
 	}
 	return true;
+}
+
+inline void normalize_angle(double& angle)
+{
+    while (angle > 2.0 * M_PI) angle -= 2.0 * M_PI;
+    while (angle < 0.0f)       angle += 2.0 * M_PI;  
 }
 
 #endif /* HELPER_FUNCTIONS_H_ */
